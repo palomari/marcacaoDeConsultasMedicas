@@ -3,11 +3,13 @@ import styled from 'styled-components/native';
 import { FlatList, RefreshControl, TouchableOpacity } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import { FontAwesome } from '@expo/vector-icons';
-import { HeaderContainer, HeaderTitle } from '../components/Header';
+import { HeaderContainer, HeaderTitle } from '../components/Header'
 import theme from '../styles/theme';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Appointment, RootStackParamList, Doctor } from '../types/appointments';
+import { Appointment } from '../types/appointments';
+import { Doctor } from '../types/doctors';
+import { RootStackParamList } from '../types/navigation';
 import { useFocusEffect } from '@react-navigation/native';
 
 type HomeScreenProps = {
@@ -18,13 +20,13 @@ const doctors: Doctor[] = [
   {
     id: '1',
     name: 'Dr. João Silva',
-    specialty: 'Nutrologo',
+    specialty: 'Cardiologista',
     image: 'https://mighty.tools/mockmind-api/content/human/91.jpg',
   },
   {
     id: '2',
     name: 'Dra. Maria Santos',
-    specialty: 'Endo',
+    specialty: 'Dermatologista',
     image: 'https://mighty.tools/mockmind-api/content/human/97.jpg',
   },
   {
@@ -106,9 +108,8 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
             <FontAwesome
               name="calendar-plus-o"
               size={20}
-              color="#8A4B56"
+              color="white"
               style={{ marginRight: 8 }}
-              
             />
           }
           buttonStyle={{
@@ -116,10 +117,6 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
             borderRadius: 8,
             padding: 12,
             marginBottom: theme.spacing.medium
-          }}
-          titleStyle={{
-            color: '#8A4B56', 
-            fontSize: 16, 
           }}
           onPress={() => navigation.navigate('CreateAppointment')}
         />
