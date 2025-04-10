@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
-import styled from 'styled-components/native';
-import { ScrollView, ViewStyle, TextStyle } from 'react-native';
-import { Button, ListItem, Text } from 'react-native-elements';
-import { useAuth } from '../contexts/AuthContext';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useFocusEffect } from '@react-navigation/native';
-import { RootStackParamList } from '../types/navigation';
-import theme from '../styles/theme';
-import Header from '../components/Header';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import React, { useState } from 'react';
+import { ScrollView, TextStyle, ViewStyle } from 'react-native';
+import { Button, ListItem, Text } from 'react-native-elements';
+import styled from 'styled-components/native';
+import Header from '../components/Header';
+import { useAuth } from '../contexts/AuthContext';
+import theme from '../styles/theme';
+import { RootStackParamList } from '../types/navigation';
 
 type PatientDashboardScreenProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'PatientDashboard'>;
@@ -18,6 +17,7 @@ type PatientDashboardScreenProps = {
 interface Appointment {
   id: string;
   patientId: string;
+  patientName: string;
   doctorId: string;
   doctorName: string;
   date: string;
@@ -110,14 +110,17 @@ const PatientDashboardScreen: React.FC = () => {
           appointments.map((appointment) => (
             <AppointmentCard key={appointment.id}>
               <ListItem.Content>
-                <ListItem.Title style={styles.doctorName as TextStyle}>
-                  {appointment.doctorName}
+                <ListItem.Title style={styles.patientName as TextStyle}>
+                  Paciente: {appointment.patientName}
                 </ListItem.Title>
-                <ListItem.Subtitle style={styles.specialty as TextStyle}>
-                  {appointment.specialty}
-                </ListItem.Subtitle>
-                <Text style={styles.dateTime as TextStyle}>
+                <ListItem.Subtitle style={styles.dateTime as TextStyle}>
                   {appointment.date} às {appointment.time}
+                </ListItem.Subtitle>
+                <Text style={styles.doctorName as TextStyle}>
+                  {appointment.doctorName}
+                </Text>
+                <Text style={styles.specialty as TextStyle}>
+                  {appointment.specialty}
                 </Text>
                 <StatusBadge status={appointment.status}>
                   <StatusText status={appointment.status}>
@@ -149,7 +152,7 @@ const styles = {
     width: '100%',
   },
   buttonStyle: {
-    backgroundColor: theme.colors.primary,
+    backgroundColor: theme.colors.vinho,
     paddingVertical: 12,
   },
   logoutButton: {
@@ -165,6 +168,11 @@ const styles = {
     fontSize: 14,
     color: theme.colors.text,
     marginTop: 4,
+  },
+  patientName: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: theme.colors.text,
   },
   dateTime: {
     fontSize: 14,

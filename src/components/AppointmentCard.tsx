@@ -40,7 +40,7 @@ const AppointmentCard: React.FC<AppointmentCardProps> = ({
         <Avatar
           size="medium"
           rounded
-          source={{ uri: `https://randomuser.me/api/portraits/men/${Math.floor(Math.random() * 10)}.jpg` }}
+          source={{ uri: `https://randomuser.me/api/portraits/women/${Math.floor(Math.random() * 10)}.jpg` }}
           containerStyle={styles.avatar}
         />
         <TextContainer>

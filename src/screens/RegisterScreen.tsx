@@ -89,7 +89,7 @@ const RegisterScreen: React.FC = () => {
         title="Voltar para Login"
         onPress={() => navigation.navigate('Login')}
         containerStyle={styles.backButton as ViewStyle}
-        buttonStyle={styles.backButtonStyle}
+        buttonStyle={styles.buttonStyle}
       />
     </Container>
   );
@@ -104,7 +104,7 @@ const styles = {
     width: '100%',
   },
   buttonStyle: {
-    backgroundColor: theme.colors.primary,
+    backgroundColor: theme.colors.vinho,
     paddingVertical: 12,
   },
   backButton: {
